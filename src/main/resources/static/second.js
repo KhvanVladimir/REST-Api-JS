@@ -26,6 +26,7 @@ function serializeForm(formNode) {
 
     string = string.substring(0, string.length - 1)
     string += "]}"
+    console.log(string)
     return string
 }
 

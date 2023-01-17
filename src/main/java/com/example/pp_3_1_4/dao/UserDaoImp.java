@@ -23,8 +23,12 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public void update(User user) {;
-        entityManagerFactory.merge(encryptPassword(user));
+    public void update(User user, boolean samePassword) {
+        if (samePassword){
+            entityManagerFactory.merge(user);
+        } else {
+            entityManagerFactory.merge(encryptPassword(user));
+        }
     }
 
     @Override

@@ -53,8 +53,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public void update(User user) {
-        userDao.update(user);
+    public void update(User user, boolean samePassword) {
+        userDao.update(user, samePassword);
     }
 
     @Override

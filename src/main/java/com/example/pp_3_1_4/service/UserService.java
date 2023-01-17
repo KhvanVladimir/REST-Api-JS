@@ -8,7 +8,7 @@ public interface UserService {
     void add(User user);
     List<User> listUsers();
     public User getUser(int id);
-    void update(User user);
+    void update(User user, boolean samePassword);
     void delete(int id);
     User findUserByName(String name);
 }

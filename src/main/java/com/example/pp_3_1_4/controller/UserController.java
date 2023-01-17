@@ -5,6 +5,7 @@ import com.example.pp_3_1_4.model.User;
 import com.example.pp_3_1_4.service.RoleService;
 import com.example.pp_3_1_4.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,19 +26,19 @@ public class UserController {
     public UserController() {
     }
 
-    @GetMapping ("/user")
-    public ModelAndView getUserPage(ModelAndView modelAndView, Principal principal){
+    @GetMapping("/user")
+    public ModelAndView getUserPage(ModelAndView modelAndView, Principal principal) {
         modelAndView.setViewName("user");
         return modelAndView;
     }
 
-    @GetMapping ("/user/information")
-    public User getCurrentUser (Principal principal){
+    @GetMapping("/user/information")
+    public User getCurrentUser(Principal principal) {
         return a.findUserByName(principal.getName());
     }
 
-    @GetMapping ("/admin")
-    public ModelAndView getAdminPage(ModelAndView modelAndView, Principal principal){
+    @GetMapping("/admin")
+    public ModelAndView getAdminPage(ModelAndView modelAndView, Principal principal) {
         modelAndView.setViewName("users");
         return modelAndView;
     }
@@ -50,30 +51,30 @@ public class UserController {
         return roles;
     }
 
-    @GetMapping ("/admin/users")
-    public List<User> getUsers(Model model){
+    @GetMapping("/admin/users")
+    public List<User> getUsers(Model model) {
         return a.listUsers();
     }
 
-    @GetMapping ("/admin/users/{id}")
-    public User getUser(@PathVariable("id") int id){
+    @GetMapping("/admin/users/{id}")
+    public User getUser(@PathVariable("id") int id) {
         return a.getUser(id);
     }
 
     @PostMapping("/admin/users")
-    public User create(@RequestBody User user){
+    public User create(@RequestBody User user) {
         a.add(user);
         return user;
     }
 
     @PutMapping("/admin/users")
-    public User change(@RequestBody User user){
-        a.update(user);
+    public User change(@RequestBody User user) {
+        a.update(user, user.getPassword().equals(a.getUser(Math.toIntExact(user.getId())).getPassword()));
         return user;
     }
 
-    @DeleteMapping ("/admin/users/{id}")
-    public String deleteUser(@PathVariable("id") int id){
+    @DeleteMapping("/admin/users/{id}")
+    public String deleteUser(@PathVariable("id") int id) {
         a.getUser(id).setRoles(null);
         a.delete(id);
         return String.format("User with ID: " + id + " was deleted");

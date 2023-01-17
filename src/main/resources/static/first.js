@@ -62,13 +62,13 @@ function addUserInTable(userDB) {
 
     let row_2_data_7 = document.createElement('td');
     row_2_data_7.innerHTML =
-        '<button name="edit" type="button" className="btn btn-primary" onclick="editUser('
+        '<button name="edit" type="button" class="btn btn-info" className="btn btn-primary" onclick="editUser('
         + userDB.id
         + ')" data-toggle="modal" >Edit</button>';
 
     let row_2_data_8 = document.createElement('td');
     row_2_data_8.innerHTML =
-        '<button name="delete" type="button" className="btn btn-primary dBtn" onclick="deleteUser('
+        '<button name="delete" type="button" class="btn btn-danger" className="btn btn-primary dBtn" onclick="deleteUser('
         + userDB.id
         + ')" data-toggle="modal" >Delete</button>';
 

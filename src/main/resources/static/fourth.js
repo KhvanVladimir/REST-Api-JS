@@ -33,7 +33,7 @@ function handleFormSubmitE(event) {
     responseJSON.then(u => {
         refreshTableUsers(u)
     })
-    
+
     document.getElementById("closeModalD").click();
 
 }
